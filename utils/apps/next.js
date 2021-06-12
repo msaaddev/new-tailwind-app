@@ -45,10 +45,6 @@ module.exports = async (name, currentDir) => {
 		tlwPkgJSON.name = name;
 		await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
 
-		// copying tailwind config files
-		command(`cp ${tailwindPaths.postCSSConfig} ${path}`);
-		command(`cp ${tailwindPaths.tailwindConfig} ${path}`);
-
 		if (!isWindows) {
 			// copying tailwind config files
 			command(`cp ${tailwindPaths.postCSSConfig} ${path}`);
