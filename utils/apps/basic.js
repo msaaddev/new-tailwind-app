@@ -1,11 +1,11 @@
-const execa = require('execa');
+const { command } = require('execa');
 const exec = require('node-async-exec');
 const writeJsonFile = require('write-json-file');
 const handleError = require('node-cli-handle-error');
 const ora = require('ora');
 const chalk = require('chalk');
-const { getPath, basicTailwind } = require('../functions/path');
-const packageJSON = require('../template/basic/package.json');
+const { getPath, basicTailwind } = require('../../functions/path');
+const packageJSON = require('../../template/basic/package.json');
 
 module.exports = async (name, currentDir) => {
 	//  get paths for basic tailwind app
@@ -23,11 +23,11 @@ module.exports = async (name, currentDir) => {
 
 		if (!isWindows) {
 			// copy template
-			await execa.command(`mkdir ${name}`);
-			await execa.command(`cp -R ${basicTailwindPaths.dist} ${path}`);
-			await execa.command(`cp -R ${basicTailwindPaths.src} ${path}`);
-			await execa.command(`cp ${basicTailwindPaths.pkgJSON} ${path}`);
-			await execa.command(`cp ${basicTailwindPaths.gitIgnore} ${path}`);
+			await command(`mkdir ${name}`);
+			await command(`cp -R ${basicTailwindPaths.dist} ${path}`);
+			await command(`cp -R ${basicTailwindPaths.src} ${path}`);
+			await command(`cp ${basicTailwindPaths.pkgJSON} ${path}`);
+			await command(`cp ${basicTailwindPaths.gitIgnore} ${path}`);
 
 			// write json file
 			const bTlwPkgJSON = { ...packageJSON };
@@ -38,19 +38,11 @@ module.exports = async (name, currentDir) => {
 			);
 		} else {
 			// copy template
-			await execa.command(`mkdir ${name}`);
-			await execa.command(
-				`xcopy ${basicTailwindPaths.winDist} ${path} /H`
-			);
-			await execa.command(
-				`xcopy ${basicTailwindPaths.winSrc} ${path} /H`
-			);
-			await execa.command(
-				`copy ${basicTailwindPaths.winPkgJSON} ${path}`
-			);
-			await execa.command(
-				`copy ${basicTailwindPaths.winGitIgnore} ${path}`
-			);
+			await command(`mkdir ${name}`);
+			await command(`xcopy ${basicTailwindPaths.winDist} ${path} /H`);
+			await command(`xcopy ${basicTailwindPaths.winSrc} ${path} /H`);
+			await command(`copy ${basicTailwindPaths.winPkgJSON} ${path}`);
+			await command(`copy ${basicTailwindPaths.winGitIgnore} ${path}`);
 
 			// write json file
 			const bTlwPkgJSON = { ...packageJSON };
