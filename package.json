@@ -1,0 +1,24 @@
+{
+	"name": "create-tailwind-app",
+	"version": "1.0.0",
+	"description": "Set up a tailwind app with `npx create-tailwind-app`",
+	"repository": "https://github.com/msaaddev/create-tailwind-app",
+	"author": {
+		"name": "Saad Irfan",
+		"email": "mrsaadirfan@gmail.com",
+		"url": "https://twitter.com/msaaddev"
+	},
+	"bin": {
+		"create-tailwind-app": "index.js",
+		"cta": "index.js"
+	},
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"format": "prettier --write \"./**/*.{js,json}\"",
+		"test": "node test.js"
+	},
+	"devDependencies": {
+		"prettier": "^2.3.1"
+	}
+}
