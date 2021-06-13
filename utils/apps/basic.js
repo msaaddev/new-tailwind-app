@@ -9,11 +9,8 @@ const packageJSON = require('../../template/basic/package.json');
 
 module.exports = async (name, currentDir) => {
 	//  get paths for basic tailwind app
-	const path = getPath(name);
+	const { path, isWindows } = getPath(name);
 	const basicTailwindPaths = basicTailwind(name, currentDir);
-
-	// check whether the OS is windows or not
-	const isWindows = process.platform === 'win32' ? true : false;
 
 	// spinner
 	const spinner = ora();

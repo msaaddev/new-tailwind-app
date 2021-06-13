@@ -10,11 +10,8 @@ const packageJSON = require('../../template/nextjs/package.json');
 
 module.exports = async (name, currentDir) => {
 	// get nextjs project path
-	const path = getPath(name);
+	const { path, isWindows } = getPath(name);
 	const tailwindPaths = nextTailwind(name, currentDir);
-
-	// check whether the OS is windows or not
-	const isWindows = process.platform === 'win32' ? true : false;
 
 	// spinner
 	const spinner = ora();
@@ -58,6 +55,8 @@ module.exports = async (name, currentDir) => {
 			command(
 				`cp ${tailwindPaths.writeGlobalCSS} ${tailwindPaths.stylesDir}`
 			);
+
+			command(`cp ${tailwindPaths.prettier} ${path}`);
 		} else {
 			// copying tailwind config files
 			command(`copy ${tailwindPaths.winPostCSSConfig} ${path}`);
@@ -67,27 +66,19 @@ module.exports = async (name, currentDir) => {
 			await command(`del ${tailwindPaths.winAppjsPath}`);
 			await command(`del ${tailwindPaths.winGlobalCSS}`);
 
-			// copying _app.js and global css
+			// copying _app.js, global css and prettier
 			command(
 				`copy ${tailwindPaths.winWriteAppJS} ${tailwindPaths.winPagesDir}`
 			);
 			command(
 				`copy ${tailwindPaths.winWriteGlobalCSS} ${tailwindPaths.winStylesDir}`
 			);
+			command(`copy ${tailwindPaths.winPrettier} ${path}`);
 		}
 
-		// installing dev dependencies
-		if (!isWindows) {
-			await command(`npm --prefix ${path} install --only=dev`);
-			await command(`npm --prefix ${path} run format`);
-		} else {
-			try {
-				await exec({ path, cmd: `npm install --only=dev` });
-				await exec({ path, cmd: `npm run format` });
-			} catch (err) {
-				handleError(err);
-			}
-		}
+		// installing dependencies
+		await exec({ path, cmd: `npm install --only=dev` });
+		await exec({ path, cmd: `npm run format` });
 
 		// succeed
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
