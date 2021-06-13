@@ -10,11 +10,8 @@ const packageJSON = require('../../template/nextjs/package.json');
 
 module.exports = async (name, currentDir) => {
 	// get nextjs project path
-	const path = getPath(name);
+	const { path, isWindows } = getPath(name);
 	const tailwindPaths = nextTailwind(name, currentDir);
-
-	// check whether the OS is windows or not
-	const isWindows = process.platform === 'win32' ? true : false;
 
 	// spinner
 	const spinner = ora();
