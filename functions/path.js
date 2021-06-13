@@ -72,7 +72,9 @@ const nextTailwind = (name, currentDir) => {
 		pagesDir: `${path}/pages`,
 		winPagesDir: `${path}${slash}pages`,
 		stylesDir: `${path}/styles`,
-		winStylesDir: `${path}${slash}styles`
+		winStylesDir: `${path}${slash}styles`,
+		prettier: `${currentDir}/template/nextjs/.prettierrc.json`,
+		winPrettier: `${currentDir}${slash}template${slash}nextjs${slash}.prettierrc.json`
 	};
 };
 
@@ -101,7 +103,9 @@ const reactTailwind = (name, currentDir) => {
 		cpIndexCSS: `${currentDir}/template/reactjs/index.css`,
 		WinCpIndexCSS: `${currentDir}${slash}template${slash}reactjs${slash}index.css`,
 		src: `${path}/src`,
-		winSrc: `${path}${slash}src`
+		winSrc: `${path}${slash}src`,
+		prettier: `${currentDir}/template/reactjs/.prettierrc.json`,
+		winPrettier: `${currentDir}${slash}template${slash}reactjs${slash}.prettierrc.json`
 	};
 };
 
