@@ -55,6 +55,8 @@ module.exports = async (name, currentDir) => {
 			command(
 				`cp ${tailwindPaths.writeGlobalCSS} ${tailwindPaths.stylesDir}`
 			);
+
+			command(`cp ${tailwindPaths.prettier} ${path}`);
 		} else {
 			// copying tailwind config files
 			command(`copy ${tailwindPaths.winPostCSSConfig} ${path}`);
@@ -64,13 +66,14 @@ module.exports = async (name, currentDir) => {
 			await command(`del ${tailwindPaths.winAppjsPath}`);
 			await command(`del ${tailwindPaths.winGlobalCSS}`);
 
-			// copying _app.js and global css
+			// copying _app.js, global css and prettier
 			command(
 				`copy ${tailwindPaths.winWriteAppJS} ${tailwindPaths.winPagesDir}`
 			);
 			command(
 				`copy ${tailwindPaths.winWriteGlobalCSS} ${tailwindPaths.winStylesDir}`
 			);
+			command(`copy ${tailwindPaths.winPrettier} ${path}`);
 		}
 
 		// installing dependencies

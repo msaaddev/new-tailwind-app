@@ -47,22 +47,20 @@ module.exports = async (name, currentDir) => {
 			command(`rm -rf ${tailwindPaths.indexCSS}`);
 
 			// copying config files
+			command(`cp ${tailwindPaths.prettier} ${path}`);
 			command(`cp ${tailwindPaths.craco} ${path}`);
 			command(`cp ${tailwindPaths.tailwindConfig} ${path}`);
 			command(`cp ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
-
-			// installing dependencies
-			await command(`npm --prefix ${path} install`);
-			await command(`npm --prefix ${path} install --only=dev`);
-			await command(`npm --prefix ${path} run format`);
 		} else {
 			// removing index.css
 			command(`del ${tailwindPaths.indexCSS}`);
 
 			// copying config files
+			command(`copy ${tailwindPaths.winPrettier} ${path}`);
 			command(`copy ${tailwindPaths.craco} ${path}`);
 			command(`copy ${tailwindPaths.tailwindConfig} ${path}`);
 			command(`copy ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
+		}
 
 		// installing dependencies
 		await exec({ path, cmd: `npm install` });
