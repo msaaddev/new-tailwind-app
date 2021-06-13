@@ -2,7 +2,9 @@ const cwd = process.cwd();
 
 /**
  *
+ *
  * @param {name} - name of the directory
+ * @return {object} - containing platform and path of the newly created project
  */
 const getPath = name => {
 	const slash = '\\';
@@ -10,18 +12,20 @@ const getPath = name => {
 	// check whether the OS is windows or not
 	const isWindows = process.platform === 'win32' ? true : false;
 
-	if (isWindows) return `${cwd}${slash}${name}`;
-	return `${cwd}/${name}`;
+	if (isWindows) return { path: `${cwd}${slash}${name}`, isWindows };
+	return { path: `${cwd}/${name}`, isWindows };
 };
 
 /**
  *
+ *
  * @param {name} - name of the directory
  * @param {currentDir} - path of the directory from where CLI is running
+ * @return {object} - path of basic tailwind app
  */
 const basicTailwind = (name, currentDir) => {
 	const slash = '\\';
-	const path = getPath(name);
+	const { path } = getPath(name);
 
 	return {
 		dist: `${currentDir}/template/basic/dist`,
@@ -39,11 +43,13 @@ const basicTailwind = (name, currentDir) => {
 
 /**
  *
+ *
  * @param {name} - name of the directory
  * @param {currentDir} - path of the directory from where CLI is running
+ * @return {object} - path of nextjs tailwind app
  */
 const nextTailwind = (name, currentDir) => {
-	const path = getPath(name);
+	const { path } = getPath(name);
 	const slash = '\\';
 
 	return {
@@ -70,8 +76,38 @@ const nextTailwind = (name, currentDir) => {
 	};
 };
 
+/**
+ *
+ *
+ * @param {name} - name of the directory
+ * @param {currentDir} - path of the directory from where CLI is running
+ * @return {object} - path of reactjs tailwind app
+ */
+const reactTailwind = (name, currentDir) => {
+	const { path } = getPath(name);
+	const slash = '\\';
+
+	return {
+		gitDir: `${path}/.git`,
+		winGitDir: `${path}${slash}.git`,
+		pkgJSON: `${path}/package.json`,
+		winPkgJSON: `${path}${slash}package.json`,
+		craco: `${currentDir}/template/reactjs/craco.config.js`,
+		winCraco: `${currentDir}${slash}template${slash}reactjs${slash}craco.config.js`,
+		tailwindConfig: `${currentDir}/template/reactjs/tailwind.config.js`,
+		winTailwindConfig: `${currentDir}${slash}template${slash}reactjs${slash}tailwind.config.js`,
+		indexCSS: `${path}/src/index.css`,
+		winIndexCSS: `${path}${slash}src${slash}index.css`,
+		cpIndexCSS: `${currentDir}/template/reactjs/index.css`,
+		WinCpIndexCSS: `${currentDir}${slash}template${slash}reactjs${slash}index.css`,
+		src: `${path}/src`,
+		winSrc: `${path}${slash}src`
+	};
+};
+
 module.exports = {
 	getPath,
 	basicTailwind,
-	nextTailwind
+	nextTailwind,
+	reactTailwind
 };
