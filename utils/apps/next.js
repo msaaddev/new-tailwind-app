@@ -73,18 +73,9 @@ module.exports = async (name, currentDir) => {
 			);
 		}
 
-		// installing dev dependencies
-		if (!isWindows) {
-			await command(`npm --prefix ${path} install --only=dev`);
-			await command(`npm --prefix ${path} run format`);
-		} else {
-			try {
-				await exec({ path, cmd: `npm install --only=dev` });
-				await exec({ path, cmd: `npm run format` });
-			} catch (err) {
-				handleError(err);
-			}
-		}
+		// installing dependencies
+		await exec({ path, cmd: `npm install --only=dev` });
+		await exec({ path, cmd: `npm run format` });
 
 		// succeed
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);

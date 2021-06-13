@@ -64,11 +64,10 @@ module.exports = async (name, currentDir) => {
 			command(`copy ${tailwindPaths.tailwindConfig} ${path}`);
 			command(`copy ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
 
-			// installing dependencies
-			await exec({ path, cmd: `npm install` });
-			await exec({ path, cmd: `npm install --only=dev` });
-			await exec({ path, cmd: `npm run format` });
-		}
+		// installing dependencies
+		await exec({ path, cmd: `npm install` });
+		await exec({ path, cmd: `npm install --only=dev` });
+		await exec({ path, cmd: `npm run format` });
 
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 	} catch (err) {
