@@ -8,8 +8,5 @@
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"tailwindcss": "^2.1.4"
-	}
+	"license": "ISC"
 }

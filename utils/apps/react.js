@@ -1,12 +1,12 @@
 const { command } = require('execa');
 const exec = require('node-async-exec');
 const writeJsonFile = require('write-json-file');
-const handleError = require('node-cli-handle-error');
 const ora = require('ora');
 const chalk = require('chalk');
 const isItGit = require('is-it-git');
-const packageJSON = require('../../template/reactjs/package.json');
+const scripts = require('../../template/reactjs/scripts.json');
 const { getPath, reactTailwind } = require('../../functions/path');
+const handleError = require('../../functions/handleError');
 
 module.exports = async (name, currentDir) => {
 	// get reactjs project path
@@ -37,11 +37,6 @@ module.exports = async (name, currentDir) => {
 
 		spinner.start(`${chalk.bold.dim('Adding tailwind configurations...')}`);
 
-		// writing content to package.json for tailwind
-		const tlwPkgJSON = { ...packageJSON };
-		tlwPkgJSON.name = name;
-		await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
-
 		if (!isWindows) {
 			// removing index.css
 			command(`rm -rf ${tailwindPaths.indexCSS}`);
@@ -51,6 +46,11 @@ module.exports = async (name, currentDir) => {
 			command(`cp ${tailwindPaths.craco} ${path}`);
 			command(`cp ${tailwindPaths.tailwindConfig} ${path}`);
 			command(`cp ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
+
+			// writing content to package.json for tailwind
+			const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
+			const tlwPkgJSON = { ...pkgJSON, ...scripts };
+			await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
 		} else {
 			// removing index.css
 			command(`del ${tailwindPaths.indexCSS}`);
@@ -60,16 +60,24 @@ module.exports = async (name, currentDir) => {
 			command(`copy ${tailwindPaths.craco} ${path}`);
 			command(`copy ${tailwindPaths.tailwindConfig} ${path}`);
 			command(`copy ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
+
+			// writing content to package.json for tailwind
+			const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
+			const tlwPkgJSON = { ...pkgJSON, ...scripts };
+			await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
 		}
 
 		// installing dependencies
-		await exec({ path, cmd: `npm install` });
-		await exec({ path, cmd: `npm install --only=dev` });
+		await exec({ path, cmd: `npm install @craco/craco` });
+		await exec({
+			path,
+			cmd: `npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9 prettier`
+		});
 		await exec({ path, cmd: `npm run format` });
 
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 	} catch (err) {
-		spinner.fail(`Couldn't add tailwind configurations.`);
-		handleError(err);
+		spinner.fail(`Couldn't create React.js Tailwind app.`);
+		handleError(name, err);
 	}
 };

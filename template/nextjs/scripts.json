@@ -1,0 +1,8 @@
+{
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"format": "prettier --write \"./**/*.{js,json}\""
+	}
+}

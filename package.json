@@ -29,6 +29,7 @@
 		"enquirer": "^2.3.6",
 		"execa": "^5.1.1",
 		"is-it-git": "^1.1.0",
+		"log-symbols": "^3.0.0",
 		"node-async-exec": "^1.0.3",
 		"node-cli-handle-error": "^1.0.0",
 		"ora": "^4.1.1",
