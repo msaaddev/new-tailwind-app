@@ -1,11 +1,11 @@
 const { command } = require('execa');
 const exec = require('node-async-exec');
 const writeJsonFile = require('write-json-file');
-const handleError = require('node-cli-handle-error');
 const ora = require('ora');
 const chalk = require('chalk');
 const { getPath, basicTailwind } = require('../../functions/path');
 const packageJSON = require('../../template/basic/package.json');
+const handleError = require('../../functions/handleError');
 
 module.exports = async (name, currentDir) => {
 	//  get paths for basic tailwind app
@@ -67,6 +67,6 @@ module.exports = async (name, currentDir) => {
 		spinner.succeed(`${chalk.green('Build generated successfully.')}`);
 	} catch (err) {
 		spinner.fail(`Couldn't create basic Tailwind app.`);
-		handleError(err);
+		handleError(name, err);
 	}
 };

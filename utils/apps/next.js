@@ -1,12 +1,12 @@
 const { command } = require('execa');
 const exec = require('node-async-exec');
 const writeJsonFile = require('write-json-file');
-const handleError = require('node-cli-handle-error');
 const ora = require('ora');
 const chalk = require('chalk');
 const isItGit = require('is-it-git');
 const { getPath, nextTailwind } = require('../../functions/path');
 const scripts = require('../../template/nextjs/scripts.json');
+const handleError = require('../../functions/handleError');
 
 module.exports = async (name, currentDir) => {
 	// get nextjs project path
@@ -91,7 +91,7 @@ module.exports = async (name, currentDir) => {
 		// succeed
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 	} catch (err) {
-		spinner.fail(`Couldn't add tailwind configurations.`);
-		handleError(`Something went wrong.`, err);
+		spinner.fail(`Couldn't create Next.js Tailwind app.`);
+		handleError(name, err);
 	}
 };

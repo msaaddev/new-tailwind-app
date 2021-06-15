@@ -1,12 +1,12 @@
 const { command } = require('execa');
 const exec = require('node-async-exec');
 const writeJsonFile = require('write-json-file');
-const handleError = require('node-cli-handle-error');
 const ora = require('ora');
 const chalk = require('chalk');
 const isItGit = require('is-it-git');
 const scripts = require('../../template/reactjs/scripts.json');
 const { getPath, reactTailwind } = require('../../functions/path');
+const handleError = require('../../functions/handleError');
 
 module.exports = async (name, currentDir) => {
 	// get reactjs project path
@@ -77,7 +77,7 @@ module.exports = async (name, currentDir) => {
 
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 	} catch (err) {
-		spinner.fail(`Couldn't add tailwind configurations.`);
-		handleError(err);
+		spinner.fail(`Couldn't create React.js Tailwind app.`);
+		handleError(name, err);
 	}
 };
