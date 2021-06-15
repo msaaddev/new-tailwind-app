@@ -18,6 +18,10 @@ module.exports = async (name, currentDir) => {
 	try {
 		spinner.start(`${chalk.bold.dim('Creating a basic Tailwind App...')}`);
 
+		// write json file
+		const bTlwPkgJSON = { ...packageJSON };
+		bTlwPkgJSON.name = name;
+
 		if (!isWindows) {
 			// copy template
 			await command(`mkdir ${name}`);
@@ -26,9 +30,7 @@ module.exports = async (name, currentDir) => {
 			await command(`cp ${basicTailwindPaths.pkgJSON} ${path}`);
 			await command(`cp ${basicTailwindPaths.gitIgnore} ${path}`);
 
-			// write json file
-			const bTlwPkgJSON = { ...packageJSON };
-			bTlwPkgJSON.name = name;
+			// writing to package.json
 			await writeJsonFile(
 				`${basicTailwindPaths.destPkgJSON}`,
 				bTlwPkgJSON
@@ -41,9 +43,7 @@ module.exports = async (name, currentDir) => {
 			await command(`copy ${basicTailwindPaths.winPkgJSON} ${path}`);
 			await command(`copy ${basicTailwindPaths.winGitIgnore} ${path}`);
 
-			// write json file
-			const bTlwPkgJSON = { ...packageJSON };
-			bTlwPkgJSON.name = name;
+			// writing to package.json
 			await writeJsonFile(
 				`${basicTailwindPaths.winDestPkgJSON}`,
 				bTlwPkgJSON
@@ -55,7 +55,7 @@ module.exports = async (name, currentDir) => {
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
 
 		// installing dependencies
-		await exec({ path, cmd: `npm install` });
+		await exec({ path, cmd: `npm install tailwindcss` });
 
 		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
 

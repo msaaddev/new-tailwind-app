@@ -6,7 +6,7 @@ const ora = require('ora');
 const chalk = require('chalk');
 const isItGit = require('is-it-git');
 const { getPath, nextTailwind } = require('../../functions/path');
-const packageJSON = require('../../template/nextjs/package.json');
+const scripts = require('../../template/nextjs/scripts.json');
 
 module.exports = async (name, currentDir) => {
 	// get nextjs project path
@@ -37,11 +37,6 @@ module.exports = async (name, currentDir) => {
 
 		spinner.start(`${chalk.bold.dim('Adding tailwind configurations...')}`);
 
-		// writing content to package.json for tailwind
-		const tlwPkgJSON = { ...packageJSON };
-		tlwPkgJSON.name = name;
-		await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
-
 		if (!isWindows) {
 			// copying tailwind config files
 			command(`cp ${tailwindPaths.postCSSConfig} ${path}`);
@@ -57,6 +52,11 @@ module.exports = async (name, currentDir) => {
 			);
 
 			command(`cp ${tailwindPaths.prettier} ${path}`);
+
+			// writing content to package.json for tailwind
+			const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
+			const tlwPkgJSON = { ...pkgJSON, ...scripts };
+			await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
 		} else {
 			// copying tailwind config files
 			command(`copy ${tailwindPaths.winPostCSSConfig} ${path}`);
@@ -74,10 +74,18 @@ module.exports = async (name, currentDir) => {
 				`copy ${tailwindPaths.winWriteGlobalCSS} ${tailwindPaths.winStylesDir}`
 			);
 			command(`copy ${tailwindPaths.winPrettier} ${path}`);
+
+			// writing content to package.json for tailwind
+			const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
+			const tlwPkgJSON = { ...pkgJSON, ...scripts };
+			await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
 		}
 
 		// installing dependencies
-		await exec({ path, cmd: `npm install --only=dev` });
+		await exec({
+			path,
+			cmd: `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest prettier`
+		});
 		await exec({ path, cmd: `npm run format` });
 
 		// succeed
