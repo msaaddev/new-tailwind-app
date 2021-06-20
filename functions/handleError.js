@@ -14,7 +14,7 @@ module.exports = (name, err, laravel = false) => {
 				.hex(`#000000`)
 				.bold(
 					` ${name} `
-				)} directory already exists. Try changing the name.\n`
+				)} directory already exists. Try changing the name.`
 		);
 	} else {
 		laravel &&
