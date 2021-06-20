@@ -4,13 +4,15 @@ const basic = require('./apps/basic');
 const next = require('./apps/next');
 const react = require('./apps/react');
 const laravel = require('./apps/laravel');
+const gatsby = require('./apps/gatsby');
 
 module.exports = async (name, currentDir) => {
 	try {
 		// await basic(name, currentDir);
 		// await next(name, currentDir);
 		// await react(name, currentDir);
-		await laravel(name, currentDir);
+		// await laravel(name, currentDir);
+		await gatsby(name, currentDir);
 	} catch (err) {
 		handleError(err);
 	}
