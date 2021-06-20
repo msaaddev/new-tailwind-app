@@ -1,5 +1,9 @@
 ## Changes across different version of create-tailwind-app
 
+### v1.1.0
+
+- Fix windows path
+
 ### v1.0.0
 
 - Generates basic tailwind app boilerplate code
