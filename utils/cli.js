@@ -6,7 +6,6 @@ const react = require('./apps/react');
 const laravel = require('./apps/laravel');
 
 module.exports = async (name, currentDir) => {
-	console.log();
 	try {
 		// await basic(name, currentDir);
 		// await next(name, currentDir);

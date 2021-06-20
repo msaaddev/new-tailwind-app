@@ -1,6 +1,6 @@
 const { command } = require('execa');
 const exec = require('node-async-exec');
-const handleError = require('node-cli-handle-error');
+const handleError = require('../../functions/handleError');
 const ora = require('ora');
 const chalk = require('chalk');
 const { getPath, laravelTailwind } = require('../../functions/path');
@@ -64,6 +64,7 @@ module.exports = async (name, currentDir) => {
 		await exec({ path, cmd: `npm run dev` });
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 	} catch (err) {
-		handleError(err);
+		spinner.fail(`Couldn't create Laravel Tailwind app.`);
+		handleError(name, err, true);
 	}
 };
