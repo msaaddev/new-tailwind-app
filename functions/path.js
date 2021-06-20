@@ -142,10 +142,50 @@ const laravelTailwind = (name, currentDir) => {
 	};
 };
 
+/**
+ *
+ *
+ * @param {name} - name of the directory
+ * @param {currentDir} - path of the directory from where CLI is running
+ * @return {object} - path of gatsby tailwind apps
+ */
+const gatsbyTailwind = (name, currentDir) => {
+	const { path } = getPath(name);
+	const slash = '\\';
+
+	return {
+		prettier: `${currentDir}/template/gatsby/.prettierrc.json`,
+		winPrettier: `${currentDir}${slash}template${slash}gatsby${slash}.prettierrc.json`,
+		delPrettier: `${path}/.prettierrc`,
+		winDelPrettier: `${path}${slash}.prettierrc`,
+		gitDir: `${path}/.git`,
+		winGitDir: `${path}${slash}.git`,
+		postCSSConfig: `${currentDir}/template/gatsby/postcss.config.js`,
+		winPostCSSConfig: `${currentDir}${slash}template${slash}gatsby${slash}postcss.config.js`,
+		tailwindConfig: `${currentDir}/template/gatsby/tailwind.config.js`,
+		winTailwindConfig: `${currentDir}${slash}template${slash}gatsby${slash}tailwind.config.js`,
+		gatsbyConfig: `${path}/gatsby-config.js`,
+		winGatsbyConfig: `${path}${slash}gatsby-config.js`,
+		cpGatsbyConfig: `${currentDir}/template/gatsby/gatsby-config.js`,
+		winCpGatsbyConfig: `${currentDir}${slash}template${slash}gatsby${slash}gatsby-config.js`,
+		globalCSS: `${path}/src/styles/global.css`,
+		winGlobalCSS: `${path}${slash}src${slash}styles${slash}global.css`,
+		destGlobalCSS: `${path}/src/styles`,
+		winDestGlobalCSS: `${path}${slash}src${slash}styles`,
+		cpGlobalCSS: `${currentDir}/template/gatsby/global.css`,
+		winCpGlobalCSS: `${currentDir}${slash}template${slash}gatsby${slash}global.css`,
+		gatsbyBrowser: `${path}/gatsby-browser.js`,
+		winGatsbyBrowser: `${path}${slash}gatsby-browser.js`,
+		cpGatsbyBrowser: `${currentDir}/template/gatsby/gatsby-browser.js`,
+		winCpGatsbyBrowser: `${currentDir}${slash}template${slash}gatsby${slash}gatsby-browser.js`
+	};
+};
+
 module.exports = {
 	getPath,
 	basicTailwind,
 	nextTailwind,
 	reactTailwind,
-	laravelTailwind
+	laravelTailwind,
+	gatsbyTailwind
 };
