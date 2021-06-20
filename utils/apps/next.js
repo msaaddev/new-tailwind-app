@@ -2,7 +2,7 @@ const { command } = require('execa');
 const exec = require('node-async-exec');
 const writeJsonFile = require('write-json-file');
 const ora = require('ora');
-const chalk = require('chalk');
+const { start, succeed, fail } = require('../../functions/spinner');
 const isItGit = require('is-it-git');
 const { getPath, nextTailwind } = require('../../functions/path');
 const scripts = require('../../template/nextjs/scripts.json');
@@ -17,11 +17,11 @@ module.exports = async (name, currentDir) => {
 	const spinner = ora();
 
 	try {
-		spinner.start(`${chalk.bold.dim('Creating a Next.js App...')}`);
+		start(spinner, `Creating a Next.js App...`);
 
 		await command(`npx create-next-app ${name}`);
 
-		spinner.succeed(`${chalk.green('Next.js App created.')}`);
+		succeed(spinner, `Next.js App created.`);
 
 		// check if directory exists
 		const isGitDir = isItGit(path);
@@ -37,29 +37,28 @@ module.exports = async (name, currentDir) => {
 
 		if (!isWindows) {
 			// prettier config file
-			spinner.start(`${chalk.bold.dim('Setting up prettier...')}`);
+			start(spinner, `Setting up prettier...`);
 			command(`cp ${tailwindPaths.prettier} ${path}`);
-			spinner.succeed(`${chalk.green('prettier config file added.')}`);
-
+			succeed(spinner, `prettier config file added.`);
 
 			// copying tailwind config files
-			spinner.start(`${chalk.bold.dim('Creating postCSS configurations...')}`);
+			start(spinner, `Creating postCSS configurations...`);
 			command(`cp ${tailwindPaths.postCSSConfig} ${path}`);
-			spinner.succeed(`${chalk.green('postCSS configuration file created.')}`);
+			succeed(spinner, `postCSS configuration file created.`);
 
-			spinner.start(`${chalk.bold.dim('Creating tailwind configurations...')}`);
+			start(spinner, `Creating tailwind configurations...`);
 			command(`cp ${tailwindPaths.tailwindConfig} ${path}`);
-			spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
+			succeed(spinner, `Tailwind configurations added.`);
 
-			spinner.start(`${chalk.bold.dim('Updating package.json file...')}`);
 			// writing content to package.json for tailwind
+			start(spinner, `Updating package.json file...`);
 			const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
 			const tlwPkgJSON = { ...pkgJSON, ...scripts };
 			await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
-			spinner.succeed(`${chalk.green('package.json file updated.')}`);
+			succeed(spinner, `package.json file updated.`);
 
 			// removing existing files
-			spinner.start(`${chalk.bold.dim('Updating Next.js files...')}`);
+			start(spinner, `Updating Next.js files...`);
 
 			await command(`rm -rf ${tailwindPaths.appjsPath}`);
 			await command(`rm -rf ${tailwindPaths.globalCSS}`);
@@ -69,31 +68,31 @@ module.exports = async (name, currentDir) => {
 				`cp ${tailwindPaths.writeGlobalCSS} ${tailwindPaths.stylesDir}`
 			);
 
-			spinner.succeed(`${chalk.green('Next.js files updated.')}`);
+			succeed(spinner, `Next.js files updated.`);
 		} else {
 			// prettier config file
-			spinner.start(`${chalk.bold.dim('Setting up prettier...')}`);
+			start(spinner, `Setting up prettier...`);
 			command(`copy ${tailwindPaths.winPrettier} ${path}`);
-			spinner.succeed(`${chalk.green('prettier config file added.')}`);
+			succeed(spinner, `prettier config file added.`);
 
 			// copying tailwind config files
-			spinner.start(`${chalk.bold.dim('Creating postCSS configurations...')}`);
+			start(spinner, `Creating postCSS configurations...`);
 			command(`copy ${tailwindPaths.winPostCSSConfig} ${path}`);
-			spinner.succeed(`${chalk.green('postCSS configuration file created.')}`);
+			succeed(spinner, `postCSS configuration file created.`);
 
-			spinner.start(`${chalk.bold.dim('Creating tailwind configurations...')}`);
+			start(spinner, `Creating tailwind configurations...`);
 			command(`copy ${tailwindPaths.winTailwindConfig} ${path}`);
-			spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
+			succeed(spinner, `Tailwind configurations added.`);
 
 			// writing content to package.json for tailwind
-			spinner.start(`${chalk.bold.dim('Updating package.json file...')}`);
+			start(spinner, `Updating package.json file...`);
 			const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
 			const tlwPkgJSON = { ...pkgJSON, ...scripts };
 			await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
-			spinner.succeed(`${chalk.green('package.json file updated.')}`);
+			succeed(spinner, `package.json file updated.`);
 
 			// removing existing files
-			spinner.start(`${chalk.bold.dim('Updating Next.js files...')}`);
+			start(spinner, `Updating Next.js files...`);
 
 			await command(`del ${tailwindPaths.winAppjsPath}`);
 			await command(`del ${tailwindPaths.winGlobalCSS}`);
@@ -106,11 +105,11 @@ module.exports = async (name, currentDir) => {
 				`copy ${tailwindPaths.winWriteGlobalCSS} ${tailwindPaths.winStylesDir}`
 			);
 
-			spinner.succeed(`${chalk.green('Next.js files updated.')}`);
+			succeed(spinner, `Next.js files updated.`);
 		}
 
 		// installing dependencies
-		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
+		start(spinner, `Installing dependencies...`);
 		await exec({
 			path,
 			cmd: `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest prettier`
@@ -118,10 +117,9 @@ module.exports = async (name, currentDir) => {
 		await exec({ path, cmd: `npm run format` });
 
 		// succeed
-		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
-		spinner.succeed(`${chalk.green('Next.js app created with tailwind integration.')}`);
+		succeed(spinner, `Dependencies installed.`);
 	} catch (err) {
-		spinner.fail(`Couldn't create Next.js Tailwind app.`);
+		fail(spinner, `Couldn't create Next.js Tailwind app.`);
 		handleError(name, err);
 	}
 };
