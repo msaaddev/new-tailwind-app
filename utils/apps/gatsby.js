@@ -1,6 +1,5 @@
 const { command } = require('execa');
 const exec = require('node-async-exec');
-const writeJsonFile = require('write-json-file');
 const ora = require('ora');
 const { start, succeed, fail } = require('../../functions/spinner');
 const isItGit = require('is-it-git');
