@@ -17,12 +17,7 @@ const end = require('./utils/end');
 	let flags = [];
 	flags = [...process.argv.slice(2)];
 
-	let app = '';
-	if (flags.length > 1) {
-		app = flags[1];
-	}
-	
-	const name = await init(flags);
+	const { name, app } = await init(flags);
 
 	try {
 		await cli(name, currentDir, app);

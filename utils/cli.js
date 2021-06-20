@@ -10,10 +10,17 @@ const vue = require('./apps/vue');
 module.exports = async (name, currentDir, app) => {
 	// type of tailwind app
 	const basicApp = app === '--basic' || app === '-b' ? true : false;
-	const nextApp = app === '--next' || app === '-n' ? true : false;
-	const reactApp = app === '--react' || app === '-r' ? true : false;
+	const nextApp =
+		app === '--next' || app === '-n' || app === '--next.js' ? true : false;
+	const reactApp =
+		app === '--react' || app === '-r' || app === '--react.js'
+			? true
+			: false;
+	const gatsbyApp =
+		app === '--gatsby' || app === '-g' || app === '--gatsby.js'
+			? true
+			: false;
 	const laravelApp = app === '--laravel' || app === '-l' ? true : false;
-	const gatsbyApp = app === '--gatsby' || app === '-g' ? true : false;
 	const vueApp = app === '--vue3' || app === '-v' ? true : false;
 
 	try {

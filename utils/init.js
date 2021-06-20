@@ -1,11 +1,11 @@
 // packages
 const welcome = require('cli-welcome');
 const pkgJSON = require('../package.json');
-const { Input } = require('enquirer');
+const { Input, Select } = require('enquirer');
 
 /*
  *
- * get user question
+ * get app name
  */
 const getInput = async () => {
 	const prompt = new Input({
@@ -24,7 +24,36 @@ const getInput = async () => {
 	return answer;
 };
 
+/**
+ *
+ * get app type
+ */
+const appType = async () => {
+	const prompt = new Select({
+		message: 'Select App Type',
+		choices: [
+			'Basic',
+			'Next.js',
+			'React.js',
+			'Gatsby.js',
+			'Vue3',
+			'Laravel'
+		]
+	});
+
+	let answer;
+
+	try {
+		answer = await prompt.run();
+		answer = `--${answer.toLowerCase()}`;
+	} catch (error) {
+		console.error(error);
+	}
+	return answer;
+};
+
 module.exports = async flags => {
+	// welcome header
 	welcome({
 		title: `${pkgJSON.name}`,
 		tagLine: `by ${pkgJSON.author.name}`,
@@ -36,25 +65,48 @@ module.exports = async flags => {
 		version: `${pkgJSON.version}`
 	});
 
+	let isAppName = false;
+	let isAppType = false;
+
 	let name = '';
+	let app = '';
 
-	let terminalInput = false;
+	// check for app type from command line arguments
+	if (flags.length > 0) {
+		const temp = flags[0];
+		if (temp[0] === '-' || temp[1] === '-') {
+			app = flags[0];
+		} else {
+			app = flags[1];
+		}
+		isAppType = true;
+	}
 
+	// separate app name from command line arguments
 	for (let i = 0; i < flags.length; i++) {
 		let tempName = flags[i];
 
 		if (tempName[0] !== '-' && tempName[1] !== '-') {
 			name = tempName;
-			terminalInput = true;
-			break;
+			isAppName = true;
 		}
 	}
 
-	if (!terminalInput) {
+	// get app name if user has not provided it
+	if (!isAppName) {
 		while (name === '') {
 			name = await getInput();
 		}
+		isAppType && console.log();
 	}
 
-	return name;
+	// get app type if user has not provided it
+	if (!isAppType) {
+		while (app === '') {
+			app = await appType();
+		}
+		console.log();
+	}
+
+	return { name, app };
 };
