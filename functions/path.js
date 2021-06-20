@@ -181,11 +181,43 @@ const gatsbyTailwind = (name, currentDir) => {
 	};
 };
 
+/**
+ *
+ *
+ * @param {name} - name of the directory
+ * @param {currentDir} - path of the directory from where CLI is running
+ * @return {object} - path of vue3 tailwind apps
+ */
+const vue3Tailwind = (name, currentDir) => {
+	const { path } = getPath(name);
+	const slash = '\\';
+
+	return {
+		prettier: `${currentDir}/template/vue/.prettierrc.json`,
+		winPrettier: `${currentDir}${slash}template${slash}vue${slash}.prettierrc.json`,
+		postCSSConfig: `${currentDir}/template/vue/postcss.config.js`,
+		winPostCSSConfig: `${currentDir}${slash}template${slash}vue${slash}postcss.config.js`,
+		tailwindConfig: `${currentDir}/template/vue/tailwind.config.js`,
+		winTailwindConfig: `${currentDir}${slash}template${slash}vue${slash}tailwind.config.js`,
+		src: `${path}/src`,
+		winSrc: `${path}${slash}src`,
+		cpIndexCSS: `${currentDir}/template/vue/index.css`,
+		winCpIndexCSS: `${currentDir}${slash}template${slash}vue3${slash}index.css`,
+		pkgJSON: `${path}/package.json`,
+		winPkgJSON: `${path}${slash}package.json`,
+		mainJs: `${path}/src/main.js`,
+		winMainJs: `${path}${slash}src${slash}main.js`,
+		cpMainJS: `${currentDir}/template/vue/main.js`,
+		winCpMainJS: `${currentDir}${slash}template${slash}vue${slash}main.js`
+	};
+};
+
 module.exports = {
 	getPath,
 	basicTailwind,
 	nextTailwind,
 	reactTailwind,
 	laravelTailwind,
-	gatsbyTailwind
+	gatsbyTailwind,
+	vue3Tailwind
 };
