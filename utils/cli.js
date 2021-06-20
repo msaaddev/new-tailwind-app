@@ -7,14 +7,45 @@ const laravel = require('./apps/laravel');
 const gatsby = require('./apps/gatsby');
 const vue = require('./apps/vue');
 
-module.exports = async (name, currentDir) => {
+module.exports = async (name, currentDir, app) => {
+	// type of tailwind app
+	const basicApp = app === '--basic' || app === '-b' ? true : false;
+	const nextApp = app === '--next' || app === '-n' ? true : false;
+	const reactApp = app === '--react' || app === '-r' ? true : false;
+	const laravelApp = app === '--laravel' || app === '-l' ? true : false;
+	const gatsbyApp = app === '--gatsby' || app === '-g' ? true : false;
+	const vueApp = app === '--vue3' || app === '-v' ? true : false;
+
 	try {
-		// await basic(name, currentDir);
-		// await next(name, currentDir);
-		// await react(name, currentDir);
-		// await laravel(name, currentDir);
-		// await gatsby(name, currentDir);
-		await vue(name, currentDir);
+		// create a basic app
+		if (basicApp) {
+			await basic(name, currentDir);
+		}
+
+		// create a next app
+		if (nextApp) {
+			await next(name, currentDir);
+		}
+
+		// create a react app
+		if (reactApp) {
+			await react(name, currentDir);
+		}
+
+		// create a laravel app
+		if (laravelApp) {
+			await laravel(name, currentDir);
+		}
+
+		// create a gatsby app
+		if (gatsbyApp) {
+			await gatsby(name, currentDir);
+		}
+
+		// create a vue3 app
+		if (vueApp) {
+			await vue(name, currentDir);
+		}
 	} catch (err) {
 		handleError(err);
 	}
