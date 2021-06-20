@@ -16,7 +16,7 @@ module.exports = async (name, currentDir) => {
 	try {
 		spinner.start(`${chalk.bold.dim('Creating a Laravel App...')}`);
 
-		await command(`laravel new ${name}`);
+		await command(`laravel new --quiet ${name}`);
 
 		spinner.succeed(`${chalk.green('Laravel App created.')}`);
 
@@ -30,9 +30,12 @@ module.exports = async (name, currentDir) => {
 		});
 
 		if (!isWindows) {
+			// removing existing files
 			await command(`rm -rf ${tailwindPaths.delWebpackMixJs}`);
 			await command(`rm -rf ${tailwindPaths.appCSS}`);
 			await command(`rm -rf ${tailwindPaths.appBladePHP}`);
+
+			// copying tailwind config files
 			await command(`cp ${tailwindPaths.tailwindConfig} ${path}`);
 			await command(`cp ${tailwindPaths.cpWebpackMixJs} ${path}`);
 			await command(
@@ -41,11 +44,24 @@ module.exports = async (name, currentDir) => {
 			await command(
 				`cp ${tailwindPaths.cpAppBladePHP} ${tailwindPaths.destAppBladePHP}`
 			);
-
-			await exec({ path, cmd: `npm run dev` });
 		} else {
+			// removing existing files
+			await command(`del ${tailwindPaths.winDelWebpackMixJs}`);
+			await command(`del ${tailwindPaths.winAppCSS}`);
+			await command(`del ${tailwindPaths.winAppBladePHP}`);
+
+			// copying tailwind config files
+			await command(`cp ${tailwindPaths.winTailwindConfig} ${path}`);
+			await command(`cp ${tailwindPaths.winCpWebpackMixJs} ${path}`);
+			await command(
+				`cp ${tailwindPaths.cpAppCSS} ${tailwindPaths.winDestAppCSS}`
+			);
+			await command(
+				`cp ${tailwindPaths.cpAppBladePHP} ${tailwindPaths.winDestAppBladePHP}`
+			);
 		}
 
+		await exec({ path, cmd: `npm run dev` });
 		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 	} catch (err) {
 		handleError(err);
