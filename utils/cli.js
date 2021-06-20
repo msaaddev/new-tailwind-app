@@ -6,6 +6,9 @@ const react = require('./apps/react');
 const laravel = require('./apps/laravel');
 const gatsby = require('./apps/gatsby');
 const vue = require('./apps/vue');
+const flagExist = require('../functions/flagExist');
+const chalk = require('chalk');
+const logSymbols = require('log-symbols');
 
 module.exports = async (name, currentDir, app) => {
 	// type of tailwind app
@@ -52,6 +55,15 @@ module.exports = async (name, currentDir, app) => {
 		// create a vue3 app
 		if (vueApp) {
 			await vue(name, currentDir);
+		}
+
+		// unrecognized flag
+		if (!flagExist(app)) {
+			console.log(
+				`\n${logSymbols.error} ${chalk.bgRed
+					.hex(`#000000`)
+					.bold(` ${app} `)} flag is not recognized.`
+			);
 		}
 	} catch (err) {
 		handleError(err);

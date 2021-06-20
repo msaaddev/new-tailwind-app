@@ -76,10 +76,13 @@ module.exports = async flags => {
 		const temp = flags[0];
 		if (temp[0] === '-' || temp[1] === '-') {
 			app = flags[0];
+			isAppType = true;
 		} else {
-			app = flags[1];
+			if (flags.length > 1) {
+				app = flags[1];
+				isAppType = true;
+			}
 		}
-		isAppType = true;
 	}
 
 	// separate app name from command line arguments
