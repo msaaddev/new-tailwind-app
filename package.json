@@ -9,8 +9,8 @@
 		"url": "https://twitter.com/msaaddev"
 	},
 	"bin": {
-		"create-tailwind-app": "index.js",
-		"cta": "index.js"
+		"new-tailwind-app": "index.js",
+		"nta": "index.js"
 	},
 	"files": [
 		"utils/*",
