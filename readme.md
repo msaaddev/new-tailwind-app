@@ -6,6 +6,7 @@
 	<img src="https://img.shields.io/npm/l/new-tailwind-app?color=%2317BCB8" alt="license">
 	<img src="https://img.shields.io/npm/dt/new-tailwind-app?color=%2317BCB8" alt="downloads">
 </div>
+<br>
 
 A Node.js based CLI that generates boilerplate code for different **tailwind** web applications.
 
