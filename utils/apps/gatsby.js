@@ -67,7 +67,7 @@ module.exports = async (name, currentDir) => {
 			// prettier config file
 			start(spinner, `Setting up prettier...`);
 			command(`del ${tailwindPaths.winDelPrettier}`);
-			command(`cp ${tailwindPaths.winPrettier} ${path}`);
+			command(`copy ${tailwindPaths.winPrettier} ${path}`);
 			succeed(spinner, `prettier config file added.`);
 
 			// copying tailwind config files
@@ -89,7 +89,7 @@ module.exports = async (name, currentDir) => {
 			// global css
 			await exec({ path: `${path}\\src`, cmd: `mkdir styles` });
 			command(
-				`cp ${tailwindPaths.winCpGlobalCSS} ${tailwindPaths.winDestGlobalCSS}`
+				`copy ${tailwindPaths.winCpGlobalCSS} ${tailwindPaths.winDestGlobalCSS}`
 			);
 			succeed(spinner, `Gatsby config files updated.`);
 		}

@@ -45,13 +45,13 @@ module.exports = async (name, currentDir) => {
 
 			// copying tailwind config files
 			start(spinner, `Creating tailwind configurations...`);
-			await command(`cp ${tailwindPaths.winTailwindConfig} ${path}`);
-			await command(`cp ${tailwindPaths.winCpWebpackMixJs} ${path}`);
+			await command(`copy ${tailwindPaths.winTailwindConfig} ${path}`);
+			await command(`copy ${tailwindPaths.winCpWebpackMixJs} ${path}`);
 			await command(
-				`cp ${tailwindPaths.cpAppCSS} ${tailwindPaths.winDestAppCSS}`
+				`copy ${tailwindPaths.cpAppCSS} ${tailwindPaths.winDestAppCSS}`
 			);
 			await command(
-				`cp ${tailwindPaths.cpAppBladePHP} ${tailwindPaths.winDestAppBladePHP}`
+				`copy ${tailwindPaths.cpAppBladePHP} ${tailwindPaths.winDestAppBladePHP}`
 			);
 			succeed(spinner, `Tailwind configurations added.`);
 		}
