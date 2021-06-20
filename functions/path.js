@@ -114,7 +114,7 @@ const reactTailwind = (name, currentDir) => {
  *
  * @param {name} - name of the directory
  * @param {currentDir} - path of the directory from where CLI is running
- * @return {object} - path of nextjs tailwind app
+ * @return {object} - path of laravel tailwind apps
  */
 const laravelTailwind = (name, currentDir) => {
 	const { path } = getPath(name);
