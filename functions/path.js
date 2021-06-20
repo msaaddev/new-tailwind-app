@@ -109,9 +109,43 @@ const reactTailwind = (name, currentDir) => {
 	};
 };
 
+/**
+ *
+ *
+ * @param {name} - name of the directory
+ * @param {currentDir} - path of the directory from where CLI is running
+ * @return {object} - path of laravel tailwind apps
+ */
+const laravelTailwind = (name, currentDir) => {
+	const { path } = getPath(name);
+	const slash = '\\';
+
+	return {
+		tailwindConfig: `${currentDir}/template/laravel/tailwind.config.js`,
+		winTailwindConfig: `${currentDir}${slash}template${slash}laravel${slash}tailwind.config.js`,
+		delWebpackMixJs: `${path}/webpack.mix.js`,
+		winDelWebpackMixJs: `${path}${slash}webpack.mix.js`,
+		cpWebpackMixJs: `${currentDir}/template/laravel/webpack.mix.js`,
+		winCpWebpackMixJs: `${currentDir}${slash}template${slash}laravel${slash}webpack.mix.js`,
+		appCSS: `${path}/resources/css/app.css`,
+		winAppCSS: `${path}${slash}resources${slash}css${slash}app.css`,
+		cpAppCSS: `${currentDir}/template/laravel/app.css`,
+		winCpAppCSS: `${currentDir}${slash}template${slash}laravel${slash}app.css`,
+		destAppCSS: `${path}/resources/css`,
+		winDestAppCSS: `${path}${slash}resources${slash}css`,
+		appBladePHP: `${path}/resources/views/welcome.blade.php`,
+		winAppBladePHP: `${path}${slash}resources${slash}views${slash}welcome.blade.php`,
+		cpAppBladePHP: `${currentDir}/template/laravel/welcome.blade.php`,
+		winCpAppBladePHP: `${currentDir}${slash}template${slash}laravel${slash}welcome.blade.php`,
+		destAppBladePHP: `${path}/resources/views`,
+		winDestAppBladePHP: `${path}${slash}resources${slash}views`
+	};
+};
+
 module.exports = {
 	getPath,
 	basicTailwind,
 	nextTailwind,
-	reactTailwind
+	reactTailwind,
+	laravelTailwind
 };
