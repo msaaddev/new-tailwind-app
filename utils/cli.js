@@ -29,32 +29,32 @@ module.exports = async (name, currentDir, app) => {
 	try {
 		// create a basic app
 		if (basicApp) {
-			await basic(name, currentDir);
+			return await basic(name, currentDir);
 		}
 
 		// create a next app
 		if (nextApp) {
-			await next(name, currentDir);
+			return await next(name, currentDir);
 		}
 
 		// create a react app
 		if (reactApp) {
-			await react(name, currentDir);
+			return await react(name, currentDir);
 		}
 
 		// create a laravel app
 		if (laravelApp) {
-			await laravel(name, currentDir);
+			return await laravel(name, currentDir);
 		}
 
 		// create a gatsby app
 		if (gatsbyApp) {
-			await gatsby(name, currentDir);
+			return await gatsby(name, currentDir);
 		}
 
 		// create a vue3 app
 		if (vueApp) {
-			await vue(name, currentDir);
+			return await vue(name, currentDir);
 		}
 
 		// unrecognized flag
@@ -64,7 +64,9 @@ module.exports = async (name, currentDir, app) => {
 					.hex(`#000000`)
 					.bold(` ${app} `)} flag is not recognized.`
 			);
+			return false;
 		}
+
 	} catch (err) {
 		handleError(err);
 	}

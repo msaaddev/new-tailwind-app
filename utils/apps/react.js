@@ -90,8 +90,12 @@ module.exports = async (name, currentDir) => {
 		});
 		await exec({ path, cmd: `npm run format` });
 		succeed(spinner, `Dependencies installed.`);
+
+		return true;
 	} catch (err) {
 		fail(spinner, `Couldn't create React.js Tailwind app.`);
 		handleError(name, err);
+
+		return false;
 	}
 };

@@ -118,8 +118,12 @@ module.exports = async (name, currentDir) => {
 
 		// succeed
 		succeed(spinner, `Dependencies installed.`);
+
+		return true;
 	} catch (err) {
 		fail(spinner, `Couldn't create Next.js Tailwind app.`);
 		handleError(name, err);
+
+		return false;
 	}
 };

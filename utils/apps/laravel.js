@@ -65,8 +65,12 @@ module.exports = async (name, currentDir) => {
 		});
 		await exec({ path, cmd: `npm run dev` });
 		succeed(spinner, `Dependencies Installed.`);
+
+		return true;
 	} catch (err) {
 		fail(spinner, `Couldn't create laravel Tailwind app.`);
 		handleError(name, err, true);
+
+		return false;
 	}
 };

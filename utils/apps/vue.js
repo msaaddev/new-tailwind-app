@@ -85,7 +85,7 @@ module.exports = async (name, currentDir) => {
 			const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
 			const tlwPkgJSON = { ...pkgJSON, ...scripts };
 			await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
-			succeed(spinner, `vue3 config files updated.`);
+			succeed(spinner, `Vue3 config files updated.`);
 		}
 
 		// installing dependencies
@@ -97,8 +97,12 @@ module.exports = async (name, currentDir) => {
 		});
 		await exec({ path, cmd: `npm run format` });
 		succeed(spinner, `Dependencies installed.`);
+
+		return true;
 	} catch (err) {
 		fail(spinner, `Couldn't create Vue3 Tailwind app.`);
 		handleError(name, err);
+
+		return false;
 	}
 };

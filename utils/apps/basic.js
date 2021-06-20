@@ -94,8 +94,12 @@ module.exports = async (name, currentDir) => {
 		await exec({ path, cmd: `npm run build:css` });
 
 		succeed(spinner, `Build generated successfully.`);
+
+		return true;
 	} catch (err) {
 		fail(spinner, `Couldn't create basic Tailwind app.`);
 		handleError(name, err);
+
+		return false;
 	}
 };
