@@ -135,7 +135,7 @@ module.exports = async (name, app) => {
 	table.push([
 		// ' Star '.bold.bgYellow.black,
 		`${chalk.bgYellow.hex(`#000000`).bold(` Star `)}`,
-		'https://github.com/msaaddev/create-tailwind-app'.grey
+		'https://github.com/msaaddev/new-tailwind-app'.grey
 	]);
 	table.push([
 		`${chalk.bgCyan.hex(`#000000`).bold(` Follow `)}`,
