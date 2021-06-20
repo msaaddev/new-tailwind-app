@@ -42,7 +42,7 @@ const cliHelpText = () => {
 	};
 
 	const helpText = meowHelp({
-		name: `create-tailwind-app`,
+		name: `new-tailwind-app`,
 		commands,
 		flags
 	});
