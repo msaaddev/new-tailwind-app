@@ -62,7 +62,7 @@ module.exports = async (name, currentDir) => {
 			spinner.succeed(`${chalk.green('package.json file updated.')}`);
 		} else {
 			// removing index.css
-			command(`del ${tailwindPaths.indexCSS}`);
+			command(`del ${tailwindPaths.winIndexCSS}`);
 
 			// prettier config file
 			spinner.start(`${chalk.bold.dim('Setting up prettier...')}`);
@@ -72,9 +72,9 @@ module.exports = async (name, currentDir) => {
 			spinner.start(
 				`${chalk.bold.dim('Creating tailwind configurations...')}`
 			);
-			command(`copy ${tailwindPaths.craco} ${path}`);
-			command(`copy ${tailwindPaths.tailwindConfig} ${path}`);
-			command(`copy ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
+			command(`copy ${tailwindPaths.winCraco} ${path}`);
+			command(`copy ${tailwindPaths.winTailwindConfig} ${path}`);
+			command(`copy ${tailwindPaths.winCpIndexCSS} ${tailwindPaths.winSrc}`);
 			spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
 
 			// writing content to package.json for tailwind
