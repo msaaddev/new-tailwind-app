@@ -2,6 +2,53 @@
 const welcome = require('cli-welcome');
 const pkgJSON = require('../package.json');
 const { Input, Select } = require('enquirer');
+const meow = require('meow');
+const meowHelp = require('cli-meow-help');
+
+/**
+ *
+ *	generates cli help text
+ */
+const cliHelpText = () => {
+	const commands = {
+		name: { desc: `Name of the tailwind app` }
+	};
+
+	const flags = {
+		basic: {
+			desc: `Generates boilerplate of a basic Tailwind app with HTML & CSS`,
+			alias: `b`
+		},
+		next: {
+			desc: `Generates boilderplate of a Next.js Tailwind app`,
+			alias: `n`
+		},
+		react: {
+			desc: `Generates boilderplate of a React.js Tailwind app`,
+			alias: `r`
+		},
+		gatsby: {
+			desc: `Generates boilderplate of a Gatsby.js Tailwind app`,
+			alias: `g`
+		},
+		vue3: {
+			desc: `Generates boilderplate of a vue3 Tailwind app`,
+			alias: `v`
+		},
+		laravel: {
+			desc: `Generates boilderplate of a laravel Tailwind app`,
+			alias: `l`
+		}
+	};
+
+	const helpText = meowHelp({
+		name: `create-tailwind-app`,
+		commands,
+		flags
+	});
+
+	meow(helpText, { flags });
+};
 
 /*
  *
@@ -54,16 +101,17 @@ const appType = async () => {
 
 module.exports = async flags => {
 	// welcome header
-	welcome({
-		title: `${pkgJSON.name}`,
-		tagLine: `by ${pkgJSON.author.name}`,
-		description: `${pkgJSON.description}`,
-		bgColor: `#20B6D2`,
-		color: `#000000`,
-		bold: true,
-		clear: true,
-		version: `${pkgJSON.version}`
-	});
+	cliHelpText() ||
+		welcome({
+			title: `${pkgJSON.name}`,
+			tagLine: `by ${pkgJSON.author.name}`,
+			description: `${pkgJSON.description}`,
+			bgColor: `#20B6D2`,
+			color: `#000000`,
+			bold: true,
+			clear: true,
+			version: `${pkgJSON.version}`
+		});
 
 	let isAppName = false;
 	let isAppType = false;
