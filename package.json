@@ -1,8 +1,8 @@
 {
-	"name": "create-tailwind-app",
+	"name": "new-tailwind-app",
 	"version": "1.0.0",
-	"description": "Set up a tailwind app with `npx create-tailwind-app`",
-	"repository": "https://github.com/msaaddev/create-tailwind-app",
+	"description": "Set up a tailwind app with `npx new-tailwind-app`",
+	"repository": "https://github.com/msaaddev/new-tailwind-app",
 	"author": {
 		"name": "Saad Irfan",
 		"email": "mrsaadirfan@gmail.com",
@@ -12,6 +12,12 @@
 		"create-tailwind-app": "index.js",
 		"cta": "index.js"
 	},
+	"files": [
+		"utils/*",
+		"template/*",
+		"functions/*",
+		"index.js"
+	],
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
