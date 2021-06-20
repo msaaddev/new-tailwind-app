@@ -101,7 +101,7 @@ const reactTailwind = (name, currentDir) => {
 		indexCSS: `${path}/src/index.css`,
 		winIndexCSS: `${path}${slash}src${slash}index.css`,
 		cpIndexCSS: `${currentDir}/template/reactjs/index.css`,
-		WinCpIndexCSS: `${currentDir}${slash}template${slash}reactjs${slash}index.css`,
+		winCpIndexCSS: `${currentDir}${slash}template${slash}reactjs${slash}index.css`,
 		src: `${path}/src`,
 		winSrc: `${path}${slash}src`,
 		prettier: `${currentDir}/template/reactjs/.prettierrc.json`,
