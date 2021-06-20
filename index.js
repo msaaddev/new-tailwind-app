@@ -11,6 +11,7 @@
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const end = require('./utils/end');
+const handleError = require('node-cli-handle-error');
 
 (module.exports = async () => {
 	const currentDir = __dirname;
@@ -21,6 +22,8 @@ const end = require('./utils/end');
 
 	try {
 		await cli(name, currentDir, app);
-	} catch (err) {}
+	} catch (err) {
+		handleError(err);
+	}
 	end();
 })();
