@@ -20,10 +20,14 @@ const handleError = require('node-cli-handle-error');
 
 	const { name, app } = await init(flags);
 
+	let execEnd = true;
+
 	try {
-		await cli(name, currentDir, app);
+		execEnd = await cli(name, currentDir, app);
 	} catch (err) {
 		handleError(err);
 	}
-	end();
+	execEnd && end(name, app);
+
+	!execEnd && console.log();
 })();
