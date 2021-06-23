@@ -12,7 +12,7 @@ const start = (spinner, msg) => spinner.start(`${chalk.bold.dim(`${msg}`)}`);
  * @param {spinner} - instance of ora
  * @return {msg} - success message
  */
-const succeed = (spinner, msg) => spinner.succeed(`${chalk.green(`${msg}`)}`);
+const succeed = (spinner, msg) => spinner.succeed(`${chalk.white(`${msg}`)}`);
 
 /**
  *
