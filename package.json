@@ -16,6 +16,7 @@
 		"utils/*",
 		"template/*",
 		"functions/*",
+		".gitignore",
 		"index.js"
 	],
 	"main": "index.js",
