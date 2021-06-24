@@ -8,9 +8,9 @@
 </div>
 <br>
 
-A Node.js based CLI that generates boilerplate code for different **tailwind** web applications.
+A cross-platform Node.js based CLI that generates boilerplate code for different **tailwind** web applications.
 
->Note: The CLI is currently in beta mode for Windows. But works perfectly well with macOS and linux.
+>Note: If you are on Windows, make sure to either use Command Prompt or Windows Powershell to run the CLI.
 
 ## 🎯 Features
 
