@@ -1,4 +1,4 @@
-## Changes across different version of create-tailwind-app
+## Changes across different version of new-tailwind-app
 
 ### 1.3.0
 
