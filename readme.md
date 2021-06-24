@@ -68,19 +68,25 @@ new-tailwind-app [app_name] --flag
 ## 🎩 Demo
 
 ```sh
-# sets up vue3 tailwind app
+# if you have installed globally
 new-tailwind-app
 ```
 
 ![creates tailwind app](img/usage-1.gif)
 
-
 ```sh
-# sets up next.js tailwind app
-new-tailwind-app [app_name] --next
+# set up a basic tailwind app using npx
+npx new-tailwind-app@latest [app_name] --basic
 ```
 
-![creates next.js tailwind app](img/usage-2.gif)
+![creates tailwind app](img/usage-2.gif)
+
+```sh
+# sets up next.js tailwind app using npx
+new-tailwind-app [app_name] --react
+```
+
+![creates next.js tailwind app](img/usage-3.gif)
 
 ## 👨🏻‍💻 Contributing
 
