@@ -1,5 +1,11 @@
 ## Changes across different version of create-tailwind-app
 
+### 1.3.0
+
+- CLI is now cross-platform
+- Fixed basic app boilerplate code for Windows
+- Fixed Tailwind basic app generation for macOS and linux
+
 ### v1.1.0
 
 - Fix windows path
