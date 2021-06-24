@@ -83,7 +83,7 @@ npx new-tailwind-app@latest [app_name] --basic
 
 ```sh
 # sets up next.js tailwind app using npx
-new-tailwind-app [app_name] --react
+npx new-tailwind-app@latest [app_name] --react
 ```
 
 ![creates next.js tailwind app](img/usage-3.gif)
