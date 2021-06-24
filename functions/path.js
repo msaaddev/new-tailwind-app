@@ -32,9 +32,7 @@ const basicTailwind = (name, currentDir) => {
 		src: `${currentDir}/template/basic/src`,
 		pkgJSON: `${currentDir}/template/basic/package.json`,
 		destPkgJSON: `${path}/package.json`,
-		winDist: `${currentDir}${slash}template${slash}basic${slash}dist`,
-		winSrc: `${currentDir}${slash}template${slash}basic${slash}src`,
-		winPkgJSON: `${currentDir}${slash}template${slash}basic${slash}package.json`,
+		winBasic: `${currentDir}${slash}template${slash}basic`,
 		winDestPkgJSON: `${path}${slash}package.json`,
 	};
 };

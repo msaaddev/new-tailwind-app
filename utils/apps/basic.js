@@ -54,21 +54,11 @@ module.exports = async (name, currentDir) => {
 		} else {
 			// copy template
 
-			start(spinner, `Creating dist directory...`);
-
-			await command(`xcopy ${basicTailwindPaths.winDist} ${path} /H`);
+			await command(`xcopy ${basicTailwindPaths.winBasic} ${path} /E`);
 
 			succeed(spinner, `dist directory created.`);
 
-			start(spinner, `Creating src directory...`);
-
-			await command(`xcopy ${basicTailwindPaths.winSrc} ${path} /H`);
-
 			succeed(spinner, `src directory created.`);
-
-			start(spinner, `Creating package.json file...`);
-
-			await command(`copy ${basicTailwindPaths.winPkgJSON} ${path}`);
 
 			succeed(spinner, `package.json file created.`);
 
