@@ -25,4 +25,5 @@ module.exports = (name, err, laravel = false) => {
 			);
 		ErrorFormat(`Something went wrong.`, err);
 	}
+	ErrorFormat(`Something went wrong.`, err);
 };
