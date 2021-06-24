@@ -43,7 +43,6 @@ module.exports = async (name, currentDir) => {
 			start(spinner, `Creating package.json file...`);
 
 			await command(`cp ${basicTailwindPaths.pkgJSON} ${path}`);
-			await command(`cp ${basicTailwindPaths.gitIgnore} ${path}`);
 
 			succeed(spinner, `package.json file created.`);
 
@@ -70,7 +69,6 @@ module.exports = async (name, currentDir) => {
 			start(spinner, `Creating package.json file...`);
 
 			await command(`copy ${basicTailwindPaths.winPkgJSON} ${path}`);
-			await command(`copy ${basicTailwindPaths.winGitIgnore} ${path}`);
 
 			succeed(spinner, `package.json file created.`);
 
