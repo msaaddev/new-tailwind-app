@@ -20,23 +20,23 @@ const cliHelpText = () => {
 			alias: `b`
 		},
 		next: {
-			desc: `Generates boilderplate of a Next.js Tailwind app`,
+			desc: `Generates boilerplate of a Next.js Tailwind app`,
 			alias: `n`
 		},
 		react: {
-			desc: `Generates boilderplate of a React.js Tailwind app`,
+			desc: `Generates boilerplate of a React.js Tailwind app`,
 			alias: `r`
 		},
 		gatsby: {
-			desc: `Generates boilderplate of a Gatsby.js Tailwind app`,
+			desc: `Generates boilerplate of a Gatsby.js Tailwind app`,
 			alias: `g`
 		},
 		vue3: {
-			desc: `Generates boilderplate of a vue3 Tailwind app`,
+			desc: `Generates boilerplate of a vue3 Tailwind app`,
 			alias: `v`
 		},
 		laravel: {
-			desc: `Generates boilderplate of a laravel Tailwind app`,
+			desc: `Generates boilerplate of a laravel Tailwind app`,
 			alias: `l`
 		}
 	};
