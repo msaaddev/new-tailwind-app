@@ -20,12 +20,12 @@ const notifyUpdate = async () => {
 		console.log();
 		console.log(
 			chalk.yellow.bold(
-				'A new version of `create-tailwind-app` is available!'
+				'A new version of `new-tailwind-app` is available!'
 			)
 		);
 		console.log(
 			'You can update by running: ' +
-				chalk.cyan('npm i -g create-tailwind-app@latest')
+				chalk.cyan('npm i -g new-tailwind-app@latest')
 		);
 		console.log();
 	}
