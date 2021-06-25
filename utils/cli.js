@@ -66,7 +66,6 @@ module.exports = async (name, currentDir, app) => {
 			);
 			return false;
 		}
-
 	} catch (err) {
 		handleError(err);
 	}

@@ -33,7 +33,7 @@ const basicTailwind = (name, currentDir) => {
 		pkgJSON: `${currentDir}/template/basic/package.json`,
 		destPkgJSON: `${path}/package.json`,
 		winBasic: `${currentDir}${slash}template${slash}basic`,
-		winDestPkgJSON: `${path}${slash}package.json`,
+		winDestPkgJSON: `${path}${slash}package.json`
 	};
 };
 
