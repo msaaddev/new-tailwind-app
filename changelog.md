@@ -1,5 +1,10 @@
 ## Changes across different version of new-tailwind-app
 
+### 1.4.3
+
+- Fixed typo in help section
+- Added workflows through GitHub Actions
+
 ### 1.4.0
 
 - Fixed update notification check
