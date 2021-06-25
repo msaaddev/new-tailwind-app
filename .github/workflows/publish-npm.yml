@@ -17,3 +17,5 @@ jobs:
           check-version: yes
           registry: https://registry.npmjs.org/
           access: public
+          check-version: true
+          path:
