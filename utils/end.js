@@ -3,6 +3,7 @@ const colors = require('colors');
 const chalk = require('chalk');
 const pkgJSON = require('../package.json');
 const logSymbols = require('log-symbols');
+const checkForUpdate = require('update-check');
 
 /**
  *
