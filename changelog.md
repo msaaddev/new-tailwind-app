@@ -1,5 +1,9 @@
 ## Changes across different version of new-tailwind-app
 
+### 1.4.0
+
+- Fixed update notification check
+
 ### 1.3.0
 
 - CLI is now cross-platform
