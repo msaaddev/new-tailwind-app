@@ -29,8 +29,6 @@ module.exports = async (name, currentDir) => {
 		if (isGitDir) {
 			if (!isWindows) {
 				await command(`rm -rf ${tailwindPaths.gitDir}`);
-			} else {
-				await command(`rmdir /Q /S ${tailwindPaths.winGitDir}`);
 			}
 		}
 
