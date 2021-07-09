@@ -1,6 +1,6 @@
 {
 	"name": "new-tailwind-app",
-	"version": "1.4.5",
+	"version": "1.4.6",
 	"description": "Set up a tailwind app with `npx new-tailwind-app`",
 	"repository": "https://github.com/msaaddev/new-tailwind-app",
 	"author": {
