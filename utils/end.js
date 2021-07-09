@@ -148,4 +148,12 @@ module.exports = async (name, app) => {
 	console.log(table.toString());
 
 	await notifyUpdate();
+
+	console.log();
+	console.log(
+		`${logSymbols.info} ${chalk.dim(
+			'Liked my work?! Nominate @msaaddev for GitHub star: https://stars.github.com'
+		)}`
+	);
+	console.log();
 };
