@@ -9,19 +9,30 @@
 </div>
 <br>
 
-A cross-platform Node.js based CLI that generates boilerplate code for different **tailwind** web applications.
+<p align="center">
+<strong>A zero-configuration cross-platform Node.js based CLI that generates boilerplate code for different tailwind web applications.</strong>
+</p>
+
+![separator](img/separate.jpeg)
+
+- **Simple**: One command setup for all your Tailwind CSS web applications
+- **Cross-platform**: Works on all available operating systems including Linux, macOS, and Windows
+- **Support**: Five different web frameworks available with Tailwind CSS integration
+- **Prettier**: Integrated prettier in Next.js, React.js, Gatsby.js & Vue3 to easily format the code with `npm run format`
+- **MIT Licensed**: Free to use for personal and commercial use.
+
 
 >Note: If you are on Windows, make sure to either use Command Prompt or Windows Powershell to run the CLI.
 
-## 🎯 Features
+## 🚀 Supported Frameworks & Libraries
 
-- 💫 Generates **basic** tailwind app with HTML & CSS boilerplate code
-- 📦 Generates **Next.js** tailwind app
-- ⚡️ Generates **React.js** tailwind app
-- 🎩 Generates **Gatsby.js** tailwind app
-- 🚀 Generates **Vue3** tailwind app
-- 💥 Generates **Laravel** tailwind app
-- 💻 Integrated **Prettier** in Next.js, React.js, Gatsby.js & Vue3 to easily format the code with `npm run format`
+- Next.js
+- React.js
+- Gatsby.js
+- Vue3
+- Laravel
+
+>You can also generate simple HTML, CSS, and JavaScript application with Tailwind integration using new-tailwind-app.
 
 ## 📦 Installation
 
