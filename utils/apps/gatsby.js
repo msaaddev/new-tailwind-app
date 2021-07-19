@@ -6,7 +6,7 @@ const isItGit = require('is-it-git');
 const { getPath, gatsbyTailwind } = require('../../functions/path');
 const handleError = require('../../functions/handleError');
 
-module.exports = async (name, currentDir) => {
+module.exports = async (name, currentDir, integratePrettier) => {
 	// get reactjs project path
 	const { path, isWindows } = getPath(name);
 	const tailwindPaths = gatsbyTailwind(name, currentDir);
@@ -33,11 +33,14 @@ module.exports = async (name, currentDir) => {
 		}
 
 		if (!isWindows) {
-			// prettier config file
-			start(spinner, `Setting up prettier...`);
 			command(`rm -rf ${tailwindPaths.delPrettier}`);
-			command(`cp ${tailwindPaths.prettier} ${path}`);
-			succeed(spinner, `prettier config file added.`);
+
+			if (integratePrettier) {
+				// prettier config file
+				start(spinner, `Setting up prettier...`);
+				command(`cp ${tailwindPaths.prettier} ${path}`);
+				succeed(spinner, `prettier config file added.`);
+			}
 
 			// copying tailwind config files
 			start(spinner, `Creating postCSS configurations...`);
@@ -62,11 +65,14 @@ module.exports = async (name, currentDir) => {
 			);
 			succeed(spinner, `Gatsby config files updated.`);
 		} else {
-			// prettier config file
-			start(spinner, `Setting up prettier...`);
 			command(`del ${tailwindPaths.winDelPrettier}`);
-			command(`copy ${tailwindPaths.winPrettier} ${path}`);
-			succeed(spinner, `prettier config file added.`);
+
+			if (integratePrettier) {
+				// prettier config file
+				start(spinner, `Setting up prettier...`);
+				command(`copy ${tailwindPaths.winPrettier} ${path}`);
+				succeed(spinner, `prettier config file added.`);
+			}
 
 			// copying tailwind config files
 			start(spinner, `Creating postCSS configurations...`);
@@ -92,14 +98,16 @@ module.exports = async (name, currentDir) => {
 			succeed(spinner, `Gatsby config files updated.`);
 		}
 
+		const package = integratePrettier ? `prettier` : ``;
+
 		// installing dependencies
 		start(spinner, `Installing dependencies...`);
 		await exec({
 			path,
-			cmd: `npm install -D gatsby-plugin-postcss tailwindcss@latest postcss@latest autoprefixer@latest prettier
+			cmd: `npm install -D gatsby-plugin-postcss tailwindcss@latest postcss@latest autoprefixer@latest ${package}
 		`
 		});
-		await exec({ path, cmd: `npm run format` });
+		integratePrettier && (await exec({ path, cmd: `npm run format` }));
 		succeed(spinner, `Dependencies installed.`);
 
 		return true;
