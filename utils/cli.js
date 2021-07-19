@@ -10,7 +10,7 @@ const flagExist = require('../functions/flagExist');
 const chalk = require('chalk');
 const logSymbols = require('log-symbols');
 
-module.exports = async (name, currentDir, app) => {
+module.exports = async (name, currentDir, app, integratePrettier) => {
 	// type of tailwind app
 	const basicApp = app === '--basic' || app === '-b' ? true : false;
 	const nextApp =
@@ -34,7 +34,7 @@ module.exports = async (name, currentDir, app) => {
 
 		// create a next app
 		if (nextApp) {
-			return await next(name, currentDir);
+			return await next(name, currentDir, integratePrettier);
 		}
 
 		// create a react app
