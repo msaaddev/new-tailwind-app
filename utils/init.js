@@ -160,9 +160,9 @@ module.exports = async flags => {
 	}
 
 	const integratePrettier =
-		(flags.indexOf(`--prettier`) || flags.indexOf(`-p`)) === -1
-			? false
-			: true;
+		flags.indexOf(`--prettier`) !== -1 || flags.indexOf(`-p`) !== -1
+			? true
+			: false;
 
 	return { name, app, integratePrettier };
 };
