@@ -1,7 +1,6 @@
 ![cover](img/cover.jpg)
 
 <div align="center">
-	<h1>💥 new-tailwind-app</h1>
 	<img src="https://img.shields.io/npm/v/new-tailwind-app?color=%2317BCB8" alt="version">
 	<img src="https://img.shields.io/npm/l/new-tailwind-app?color=%2317BCB8" alt="license">
 	<img src="https://img.shields.io/npm/dt/new-tailwind-app?color=%2317BCB8" alt="downloads">
