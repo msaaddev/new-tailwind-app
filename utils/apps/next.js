@@ -8,7 +8,7 @@ const { getPath, nextTailwind } = require('../../functions/path');
 const scripts = require('../../template/nextjs/scripts.json');
 const handleError = require('../../functions/handleError');
 
-module.exports = async (name, currentDir) => {
+module.exports = async (name, currentDir, integratePrettier) => {
 	// get nextjs project path
 	const { path, isWindows } = getPath(name);
 	const tailwindPaths = nextTailwind(name, currentDir);
@@ -34,10 +34,12 @@ module.exports = async (name, currentDir) => {
 		}
 
 		if (!isWindows) {
-			// prettier config file
-			start(spinner, `Setting up prettier...`);
-			command(`cp ${tailwindPaths.prettier} ${path}`);
-			succeed(spinner, `prettier config file added.`);
+			if(integratePrettier) {
+				// prettier config file
+				start(spinner, `Setting up prettier...`);
+				command(`cp ${tailwindPaths.prettier} ${path}`);
+				succeed(spinner, `prettier config file added.`);
+			}
 
 			// copying tailwind config files
 			start(spinner, `Creating postCSS configurations...`);
@@ -48,12 +50,14 @@ module.exports = async (name, currentDir) => {
 			command(`cp ${tailwindPaths.tailwindConfig} ${path}`);
 			succeed(spinner, `Tailwind configurations added.`);
 
-			// writing content to package.json for tailwind
-			start(spinner, `Updating package.json file...`);
-			const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
-			const tlwPkgJSON = { ...pkgJSON, ...scripts };
-			await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
-			succeed(spinner, `package.json file updated.`);
+			if(integratePrettier) {
+				// writing content to package.json for tailwind
+				start(spinner, `Updating package.json file...`);
+				const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
+				const tlwPkgJSON = { ...pkgJSON, ...scripts };
+				await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
+				succeed(spinner, `package.json file updated.`);
+			}
 
 			// removing existing files
 			start(spinner, `Updating Next.js files...`);
@@ -68,10 +72,12 @@ module.exports = async (name, currentDir) => {
 
 			succeed(spinner, `Next.js files updated.`);
 		} else {
-			// prettier config file
-			start(spinner, `Setting up prettier...`);
-			command(`copy ${tailwindPaths.winPrettier} ${path}`);
-			succeed(spinner, `prettier config file added.`);
+			if(integratePrettier) {
+				// prettier config file
+				start(spinner, `Setting up prettier...`);
+				command(`copy ${tailwindPaths.winPrettier} ${path}`);
+				succeed(spinner, `prettier config file added.`);
+			}
 
 			// copying tailwind config files
 			start(spinner, `Creating postCSS configurations...`);
@@ -82,12 +88,14 @@ module.exports = async (name, currentDir) => {
 			command(`copy ${tailwindPaths.winTailwindConfig} ${path}`);
 			succeed(spinner, `Tailwind configurations added.`);
 
-			// writing content to package.json for tailwind
-			start(spinner, `Updating package.json file...`);
-			const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
-			const tlwPkgJSON = { ...pkgJSON, ...scripts };
-			await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
-			succeed(spinner, `package.json file updated.`);
+			if(integratePrettier) {
+				// writing content to package.json for tailwind
+				start(spinner, `Updating package.json file...`);
+				const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
+				const tlwPkgJSON = { ...pkgJSON, ...scripts };
+				await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
+				succeed(spinner, `package.json file updated.`);
+			}
 
 			// removing existing files
 			start(spinner, `Updating Next.js files...`);
@@ -106,13 +114,16 @@ module.exports = async (name, currentDir) => {
 			succeed(spinner, `Next.js files updated.`);
 		}
 
+		const package = integratePrettier ? `prettier` : ``;
+
 		// installing dependencies
 		start(spinner, `Installing dependencies...`);
 		await exec({
 			path,
-			cmd: `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest prettier`
+			cmd: `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest ${package}`
 		});
-		await exec({ path, cmd: `npm run format` });
+
+		integratePrettier && await exec({ path, cmd: `npm run format` });
 
 		// succeed
 		succeed(spinner, `Dependencies installed.`);

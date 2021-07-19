@@ -18,12 +18,12 @@ const handleError = require('node-cli-handle-error');
 	let flags = [];
 	flags = [...process.argv.slice(2)];
 
-	const { name, app } = await init(flags);
+	const { name, app, integratePrettier } = await init(flags);
 
 	let execEnd = true;
 
 	try {
-		execEnd = await cli(name, currentDir, app);
+		execEnd = await cli(name, currentDir, app, integratePrettier);
 	} catch (err) {
 		handleError(err);
 	}

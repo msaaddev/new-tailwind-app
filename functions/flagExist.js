@@ -14,7 +14,9 @@ module.exports = flag => {
 		'--laravel',
 		'-l',
 		'--vue3',
-		'-v'
+		'-v',
+		'--prettier',
+		'-p'
 	];
 
 	const flagExists = flags.indexOf(flag) === -1 ? false : true;

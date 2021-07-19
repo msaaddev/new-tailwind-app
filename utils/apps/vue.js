@@ -5,12 +5,10 @@ const writeJsonFile = require('write-json-file');
 const { start, succeed, fail } = require('../../functions/spinner');
 const { getPath, vue3Tailwind } = require('../../functions/path');
 const handleError = require('../../functions/handleError');
-const logSymbols = require('log-symbols');
-const chalk = require('chalk');
 const fs = require('fs');
 const scripts = require('../../template/vue/scripts.json');
 
-module.exports = async (name, currentDir) => {
+module.exports = async (name, currentDir, integratePrettier) => {
 	// get reactjs project path
 	const { path, isWindows } = getPath(name);
 	const tailwindPaths = vue3Tailwind(name, currentDir);
@@ -35,10 +33,12 @@ module.exports = async (name, currentDir) => {
 		succeed(spinner, `Vue3 App created.`);
 
 		if (!isWindows) {
-			// prettier config file
-			start(spinner, `Setting up prettier...`);
-			command(`cp ${tailwindPaths.prettier} ${path}`);
-			succeed(spinner, `prettier config file added.`);
+			if (integratePrettier) {
+				// prettier config file
+				start(spinner, `Setting up prettier...`);
+				command(`cp ${tailwindPaths.prettier} ${path}`);
+				succeed(spinner, `prettier config file added.`);
+			}
 
 			// copying tailwind config files
 			start(spinner, `Creating postCSS configurations...`);
@@ -54,15 +54,19 @@ module.exports = async (name, currentDir) => {
 			command(`cp ${tailwindPaths.cpMainJS} ${tailwindPaths.src}`);
 			command(`cp ${tailwindPaths.cpIndexCSS} ${tailwindPaths.src}`);
 
-			const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
-			const tlwPkgJSON = { ...pkgJSON, ...scripts };
-			await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
-			succeed(spinner, `vue3 config files updated.`);
+			if (integratePrettier) {
+				const pkgJSON = require(`${tailwindPaths.pkgJSON}`);
+				const tlwPkgJSON = { ...pkgJSON, ...scripts };
+				await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON);
+				succeed(spinner, `vue3 config files updated.`);
+			}
 		} else {
-			// prettier config file
-			start(spinner, `Setting up prettier...`);
-			command(`copy ${tailwindPaths.winPrettier} ${path}`);
-			succeed(spinner, `prettier config file added.`);
+			if (integratePrettier) {
+				// prettier config file
+				start(spinner, `Setting up prettier...`);
+				command(`copy ${tailwindPaths.winPrettier} ${path}`);
+				succeed(spinner, `prettier config file added.`);
+			}
 
 			// copying tailwind config files
 			start(spinner, `Creating postCSS configurations...`);
@@ -82,20 +86,24 @@ module.exports = async (name, currentDir) => {
 				`copy ${tailwindPaths.winCpIndexCSS} ${tailwindPaths.winSrc}`
 			);
 
-			const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
-			const tlwPkgJSON = { ...pkgJSON, ...scripts };
-			await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
-			succeed(spinner, `Vue3 config files updated.`);
+			if (integratePrettier) {
+				const pkgJSON = require(`${tailwindPaths.winPkgJSON}`);
+				const tlwPkgJSON = { ...pkgJSON, ...scripts };
+				await writeJsonFile(`${tailwindPaths.winPkgJSON}`, tlwPkgJSON);
+				succeed(spinner, `Vue3 config files updated.`);
+			}
 		}
+
+		const package = integratePrettier ? `prettier` : ``;
 
 		// installing dependencies
 		start(spinner, `Installing dependencies...`);
 		await exec({
 			path,
-			cmd: `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest prettier
+			cmd: `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest ${package}
 		`
 		});
-		await exec({ path, cmd: `npm run format` });
+		integratePrettier && (await exec({ path, cmd: `npm run format` }));
 		succeed(spinner, `Dependencies installed.`);
 
 		return true;

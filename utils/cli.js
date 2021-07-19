@@ -10,7 +10,7 @@ const flagExist = require('../functions/flagExist');
 const chalk = require('chalk');
 const logSymbols = require('log-symbols');
 
-module.exports = async (name, currentDir, app) => {
+module.exports = async (name, currentDir, app, integratePrettier) => {
 	// type of tailwind app
 	const basicApp = app === '--basic' || app === '-b' ? true : false;
 	const nextApp =
@@ -34,12 +34,12 @@ module.exports = async (name, currentDir, app) => {
 
 		// create a next app
 		if (nextApp) {
-			return await next(name, currentDir);
+			return await next(name, currentDir, integratePrettier);
 		}
 
 		// create a react app
 		if (reactApp) {
-			return await react(name, currentDir);
+			return await react(name, currentDir, integratePrettier);
 		}
 
 		// create a laravel app
@@ -49,12 +49,12 @@ module.exports = async (name, currentDir, app) => {
 
 		// create a gatsby app
 		if (gatsbyApp) {
-			return await gatsby(name, currentDir);
+			return await gatsby(name, currentDir, integratePrettier);
 		}
 
 		// create a vue3 app
 		if (vueApp) {
-			return await vue(name, currentDir);
+			return await vue(name, currentDir, integratePrettier);
 		}
 
 		// unrecognized flag

@@ -38,6 +38,10 @@ const cliHelpText = () => {
 		laravel: {
 			desc: `Generates boilerplate of a laravel Tailwind app`,
 			alias: `l`
+		},
+		prettier: {
+			desc: `Integrate Prettier with Next.js, React.js, Gatsby.js or Vue3`,
+			alias: `p`
 		}
 	};
 
@@ -159,5 +163,10 @@ module.exports = async flags => {
 		console.log();
 	}
 
-	return { name, app };
+	const integratePrettier =
+		flags.indexOf(`--prettier`) !== -1 || flags.indexOf(`-p`) !== -1
+			? true
+			: false;
+
+	return { name, app, integratePrettier };
 };
