@@ -25,11 +25,11 @@
 
 ## 🚀 Supported Frameworks & Libraries
 
-- Next.js
-- React.js
-- Gatsby.js
-- Vue3
-- Laravel
+- [Next.js](https://nextjs.org/)
+- [React.js](https://reactjs.org/)
+- [Gatsby.js](https://www.gatsbyjs.com/)
+- [Vue3](https://v3.vuejs.org/)
+- [Laravel](https://laravel.com/)
 
 >You can also generate simple HTML, CSS, and JavaScript application with Tailwind integration using new-tailwind-app.
 
