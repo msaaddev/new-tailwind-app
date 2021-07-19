@@ -17,7 +17,7 @@
 - **Simple**: One command setup for all your Tailwind CSS web applications
 - **Cross-platform**: Works on all available operating systems including Linux, macOS, and Windows
 - **Support**: Five different web frameworks available with Tailwind CSS integration
-- **Prettier**: Integrated prettier in Next.js, React.js, Gatsby.js & Vue3 to easily format the code with `npm run format`
+- **Prettier**: Integrate prettier in Next.js, React.js, Gatsby.js & Vue3 with `--prettier` flag and then easily format the code with `npm run format`
 - **MIT Licensed**: Free to use for personal and commercial use.
 
 
@@ -57,14 +57,26 @@ npx new-tailwind-app [app_name] --basic
 # create a next.js tailwind app
 npx new-tailwind-app [app_name] --next
 
+# create a next.js tailwind app with prettier
+npx new-tailwind-app [app_name] --next --prettier
+
 # create a react.js tailwind app
 npx new-tailwind-app [app_name] --react
+
+# create a react.js tailwind app with prettier
+npx new-tailwind-app [app_name] --react --prettier
 
 # create a gatsby.js tailwind app
 npx new-tailwind-app [app_name] --gatsby
 
+# create a gatsby.js tailwind app with prettier
+npx new-tailwind-app [app_name] --gatsby --prettier
+
 # create a vue3 tailwind app
 npx new-tailwind-app [app_name] --vue3
+
+# create a vue3 tailwind app with prettier
+npx new-tailwind-app [app_name] --vue3 --prettier
 
 # create a laravel tailwind app
 npx new-tailwind-app [app_name] --laravel
