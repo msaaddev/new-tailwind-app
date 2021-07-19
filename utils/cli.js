@@ -39,7 +39,7 @@ module.exports = async (name, currentDir, app, integratePrettier) => {
 
 		// create a react app
 		if (reactApp) {
-			return await react(name, currentDir);
+			return await react(name, currentDir, integratePrettier);
 		}
 
 		// create a laravel app
@@ -49,12 +49,12 @@ module.exports = async (name, currentDir, app, integratePrettier) => {
 
 		// create a gatsby app
 		if (gatsbyApp) {
-			return await gatsby(name, currentDir);
+			return await gatsby(name, currentDir, integratePrettier);
 		}
 
 		// create a vue3 app
 		if (vueApp) {
-			return await vue(name, currentDir);
+			return await vue(name, currentDir, integratePrettier);
 		}
 
 		// unrecognized flag
