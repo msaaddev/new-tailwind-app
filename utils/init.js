@@ -38,6 +38,10 @@ const cliHelpText = () => {
 		laravel: {
 			desc: `Generates boilerplate of a laravel Tailwind app`,
 			alias: `l`
+		},
+		prettier: {
+			desc: `Integrate Prettier with Next.js, React.js, Gatsby.js or Vue3`,
+			alias: `p`
 		}
 	};
 
