@@ -4,7 +4,7 @@
 	<img src="https://img.shields.io/npm/v/new-tailwind-app?color=%2317BCB8" alt="version">
 	<img src="https://img.shields.io/npm/l/new-tailwind-app?color=%2317BCB8" alt="license">
 	<img src="https://img.shields.io/npm/dt/new-tailwind-app?color=%2317BCB8" alt="downloads">
-	<a href="https://stars.github.com/">
+	<a href="https://stars.github.com/nominate/">
 		<img src="https://img.shields.io/badge/GitHub%20Star-Nominate%20%40msaaddev-%2317bcb8" alt="nominate @msaaddev for GitHub Star" />
 	</a>
 </div>
