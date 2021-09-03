@@ -21,6 +21,7 @@
 - **Support**: Five different web frameworks available with Tailwind CSS integration
 - **Prettier**: Integrate prettier in Next.js, React.js, Gatsby.js & Vue3 with `--prettier` flag and then easily format the code with `npm run format`
 - **MIT Licensed**: Free to use for personal and commercial use.
+- **Featured**: new-tailwind-app has been featured in [CooperPress](https://cooperpress.com/) newsletters, i.e., [Node Weekly](https://nodeweekly.com/issues/397) and [JavaScript Weekly](https://javascriptweekly.com/issues/547) that is subscribed by half a million developers..
 
 
 >Note: If you are on Windows, make sure to either use Command Prompt or Windows Powershell to run the CLI.
